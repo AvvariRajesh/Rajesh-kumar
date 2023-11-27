@@ -1,0 +1,41 @@
+import random
+import time
+
+def generate_random_text():
+    words = ["python", "programming", "typing", "speed", "tester", "application", "practice", "skills", "accuracy"]
+    return ' '.join(random.choices(words, k=50))
+
+def calculate_typing_speed(start_time, end_time, typed_words):
+    total_time = end_time - start_time
+    words_per_minute = (typed_words / total_time) * 60
+    return words_per_minute
+
+def typing_speed_test():
+    print("Welcome to Typing Speed Tester!")
+    input("Press Enter to start...")
+
+    text_to_type = generate_random_text()
+    print("\nType the following text:")
+    print(text_to_type)
+    
+    input("Press Enter when you're ready to start typing...")
+
+    start_time = time.time()
+
+    user_input = input("Start typing: ")
+
+    end_time = time.time()
+
+    typed_words = len(user_input.split())
+    speed = calculate_typing_speed(start_time, end_time, typed_words)
+
+    print(f"\nYour typing speed: {speed:.2f} words per minute")
+    
+    # Calculate accuracy
+    correct_words = sum(word1 == word2 for word1, word2 in zip(text_to_type.split(), user_input.split()))
+    accuracy = (correct_words / len(text_to_type.split())) * 100
+
+    print(f"Your typing accuracy: {accuracy:.2f}%")
+
+if __name__ == "__main__":
+    typing_speed_test()
